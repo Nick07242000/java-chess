@@ -13,11 +13,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-//import com.nameNotFound.javaChess.service.impl.GameService;
+import com.nameNotFound.javaChess.service.GameService;
 import com.nameNotFound.javaChess.userInterface.UserInterface;
 
 public class WindowUI extends UserInterface implements ActionListener {
-    //private GameService gameService = GameService.getInstance();
+    private GameService gameService = GameService.getInstance();
     private JFrame menuWindow;
     private JFrame boardWindow;
     private JFrame takenPiecesWindow;
@@ -42,12 +42,9 @@ public class WindowUI extends UserInterface implements ActionListener {
 
     }
 
-    /*
-    @Override
     public void resetBoard() {
 
     }
-    */
 
     @Override
     public void showTakenPieces() {

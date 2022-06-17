@@ -9,13 +9,13 @@ import com.nameNotFound.javaChess.model.pieces.impl.Bishop;
 import com.nameNotFound.javaChess.model.pieces.impl.Knight;
 import com.nameNotFound.javaChess.model.pieces.impl.Queen;
 import com.nameNotFound.javaChess.model.pieces.impl.Rook;
-//import com.nameNotFound.javaChess.service.impl.GameService;
+import com.nameNotFound.javaChess.service.GameService;
 import com.nameNotFound.javaChess.userInterface.UserInterface;
 import com.nameNotFound.javaChess.utils.Position;
 import com.nameNotFound.javaChess.utils.enums.ColorEnum;
 
 public class ConsoleUI extends UserInterface {
-    //private GameService gameService = GameService.getInstance();
+    private GameService gameService = GameService.getInstance();
     Scanner scanner = new Scanner(System.in);
 
     public ConsoleUI() {
@@ -52,7 +52,6 @@ public class ConsoleUI extends UserInterface {
 
     @Override
     public void showBoard() {
-        /*
         Board b = gameService.getBoard();
         int row = 8;
         for (int i = 0; i < 8; i++) {
@@ -88,12 +87,10 @@ public class ConsoleUI extends UserInterface {
         System.out.println("||   ||     A     |     B     |     C     |     D     |     E     |     F     |     G     |     H     ||   ||");
         System.out.println("||===||===============================================================================================||===||");
         System.out.println(" ");
-        */
     }
 
     @Override
     public void showTakenPieces() {
-        /*
         ArrayList<Piece> b_p_t = gameService.getTakenPieces(ColorEnum.BLACK);
         ArrayList<Piece> w_p_t = gameService.getTakenPieces(ColorEnum.WHITE);;
         System.out.print("||====================|");
@@ -139,12 +136,10 @@ public class ConsoleUI extends UserInterface {
         else
             System.out.print("||");
         System.out.println(" ");
-        */
     }
 
     @Override
     public void movePiece() {
-        /*
         String posOne = validatePosition(PIECE_TO_MOVE_MESSAGE);
         String posTwo = validatePosition(WHERE_TO_MOVE_MESSAGE);
         try {
@@ -152,15 +147,12 @@ public class ConsoleUI extends UserInterface {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        */
     }
 
     @Override
     public void showTurn() {
-        /*
         System.out.println(TURN_MESSAGE + gameService.getTurn());
         System.out.println(" ");
-        */
     }
 
     @Override
@@ -181,12 +173,16 @@ public class ConsoleUI extends UserInterface {
                 valid = false;
                 System.out.println(INVALID_POSITION_MESSAGE);
             }
-//            char letter = pos.charAt(0);
-//            int number = pos.charAt(1);
-//            if (letter < 'a' || letter > 'h' || number > 8) {
-//                valid = false;
-//                System.out.println(INVALID_POSITION_MESSAGE);
-//            }
+
+            /*
+            char letter = pos.charAt(0);
+            int number = pos.charAt(1);
+            if (letter < 'a' || letter > 'h' || number > 8) {
+                valid = false;
+                System.out.println(INVALID_POSITION_MESSAGE);
+            }
+            */
+            
         } while (!valid);
         return pos;
     }
