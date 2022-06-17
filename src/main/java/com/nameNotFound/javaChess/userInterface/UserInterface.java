@@ -1,8 +1,8 @@
 package com.nameNotFound.javaChess.userInterface;
 
-//import com.nameNotFound.javaChess.utils.patterns.observer.Observer;
+import com.nameNotFound.javaChess.utils.patterns.observer.Observer;
 
-public abstract class UserInterface /*implements Observer*/ {
+public abstract class UserInterface implements Observer {
     protected final static String TURN_MESSAGE = "Turno De ";
     protected final static String PIECE_TO_MOVE_MESSAGE = "Seleccione Pieza a Mover (Formato LETRANUMERO):";
     protected final static String WHERE_TO_MOVE_MESSAGE = "Seleccione Destino:";
