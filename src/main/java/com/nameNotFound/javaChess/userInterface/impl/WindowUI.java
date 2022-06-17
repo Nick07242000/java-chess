@@ -24,7 +24,7 @@ public class WindowUI extends UserInterface implements ActionListener {
 
     public WindowUI() {
         createMenuWindow();
-        //update();
+        update();
     }
 
     @Override
@@ -64,12 +64,10 @@ public class WindowUI extends UserInterface implements ActionListener {
 
     }
 
-    /*
     @Override
     public void update() {
 
     }
-    */
 
     @Override
     public void actionPerformed(ActionEvent e) {

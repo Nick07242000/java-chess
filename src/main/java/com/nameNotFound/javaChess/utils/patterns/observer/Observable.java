@@ -1,4 +1,4 @@
-package com.nameNotFound.javaChess.utils.paterns.observer;
+package com.nameNotFound.javaChess.utils.patterns.observer;
 
 import java.util.ArrayList;
 

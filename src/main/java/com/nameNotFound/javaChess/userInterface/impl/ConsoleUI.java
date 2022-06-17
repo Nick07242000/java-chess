@@ -19,7 +19,7 @@ public class ConsoleUI extends UserInterface {
     Scanner scanner = new Scanner(System.in);
 
     public ConsoleUI() {
-        //update();
+        update();
     }
 
     public Piece requestToChoosePiece(ColorEnum c) {
@@ -163,14 +163,12 @@ public class ConsoleUI extends UserInterface {
         */
     }
 
-    /*
     @Override
     public void update() {
         clearConsole();
         showBoard();
         showTakenPieces();
     }
-    */
 
     private String validatePosition(String message) {
         String pos;
