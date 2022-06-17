@@ -199,6 +199,7 @@ public class Game extends Observable {
 
     //Check
     public boolean isCheck() {
+        System.out.println(board.getKing(turn));
         return isAttacked(board.getKing(turn));
     }
 
