@@ -12,7 +12,7 @@ import com.nameNotFound.javaChess.utils.enums.PieceEnum;
 import java.util.ArrayList;
 
 public class GameService {
-    //private final Game game = Game.getInstance();
+    private final Game game = Game.getInstance();
 
     private static GameService instance;
 
