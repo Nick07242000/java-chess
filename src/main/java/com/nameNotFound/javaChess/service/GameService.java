@@ -45,8 +45,12 @@ public class GameService {
         Board board = getBoard();
         Piece pieceOne = board.getPiece(pos1);
         Piece pieceTwo = board.getPiece(pos2);
-        ArrayList<Position> possibleMovements = pieceOne.possibleMovements(pos1);
-        ArrayList<Position> possibleTakes = pieceOne.possibleTakes(pos1);
+        ArrayList<Position> possibleMovements = new ArrayList<>();
+        ArrayList<Position> possibleTakes = new ArrayList<>();
+        if (pieceOne != null) {
+            possibleMovements = pieceOne.possibleMovements(pos1);
+            possibleTakes = pieceOne.possibleTakes(pos1);
+        }
         boolean wasPieceTaken;
         if(pieceOne == null)
             throw new InvalidPositionException("Porfavor seleccione una Pieza!");
@@ -74,6 +78,10 @@ public class GameService {
                     game.removePiece(ColorEnum.BLACK);
             }
             game.returnMovementBackwards();
+            throw new InvalidPositionException("Esta poniendo su Rey en Jaque!");
+        }
+        game.changeTurn();
+        if(game.isCheck()) {
             throw new InvalidPositionException(UserInterface.CHECK_MESSAGE);
         }
     }

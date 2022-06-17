@@ -85,7 +85,6 @@ public class Game extends Observable {
     }
 
     public boolean movePiece(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo) throws InvalidPositionException{
-        System.out.println("LLEGUE");
         Movement movement = new Movement(posOne, posTwo, board.getPiece(posOne).getWasMoved());
         boolean takePiece = false;
         if (!analizeTrajectory(posOne, posTwo)) {
@@ -96,7 +95,7 @@ public class Game extends Observable {
                 String corner = getCorner(posTwo);
                 if (canCastle(posOne, posTwo, pieceOne, pieceTwo, corner)) {
                     castle(posOne, posTwo, pieceOne, pieceTwo, corner);
-                    return takePiece;
+                    return false;
                 }
             }
             if (turn.equals(ColorEnum.BLACK))
@@ -107,7 +106,6 @@ public class Game extends Observable {
         }
         movements.add(movement);
         board.movePiece(posOne, posTwo);
-        changeTurn();
         notifyObs();
         return takePiece;
     }
@@ -238,7 +236,6 @@ public class Game extends Observable {
         Movement movement = movements.get(movements.size()-1);
         board.undoMovement(movement.getPosTwo(), movement.getPosOne(), movement.isOldWasMoved());
         movements.remove(movements.size()-1);
-        changeTurn();
         notifyObs();
     }
 

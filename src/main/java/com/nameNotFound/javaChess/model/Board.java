@@ -30,13 +30,17 @@ public class Board {
     }
 
     public Position getKing(ColorEnum c) {
-        Position p = null;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
+        Position p;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 p = new Position(i,j);
-                if (getPiece(p) != null)
-                    if (getPiece(p).getName().equals(PieceEnum.KING) && getPiece(p).getColor().equals(c))
+                if (getPiece(p) != null) {
+                    if (getPiece(p).getName().equals(PieceEnum.KING) && getPiece(p).getColor().equals(c)) {
                         return p;
+                    }
+                }
+            }
+        }
         return null;
     }
 
