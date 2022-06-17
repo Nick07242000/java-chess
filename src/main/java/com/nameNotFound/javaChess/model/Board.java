@@ -35,10 +35,7 @@ public class Board {
             for (int j = 0; j < 8; j++) {
                 p = new Position(i,j);
                 if (getPiece(p) != null) {
-                    System.out.println(p.getX() + "-" + p.getY() + ":");
-                    System.out.println(getPiece(p).getName());
-                    if (getPiece(p).getName().equals(PieceEnum.KING) && !getPiece(p).getColor().equals(c)) {
-                        System.out.println("KING: " + p.getX() + "-" + p.getY());
+                    if (getPiece(p).getName().equals(PieceEnum.KING) && getPiece(p).getColor().equals(c)) {
                         return p;
                     }
                 }

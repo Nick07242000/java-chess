@@ -71,13 +71,17 @@ public class GameService {
             throw new InvalidPositionException("No puede tomar esa Pieza!");
         wasPieceTaken = game.movePiece(pos1, pos2, pieceOne, pieceTwo);
         if(game.isCheck()) {
-//            if(wasPieceTaken) {
-//                if (game.getTurn().equals(ColorEnum.BLACK))
-//                    game.removePiece(ColorEnum.WHITE);
-//                else
-//                    game.removePiece(ColorEnum.BLACK);
-//            }
-//            game.returnMovementBackwards();
+            if(wasPieceTaken) {
+                if (game.getTurn().equals(ColorEnum.BLACK))
+                    game.removePiece(ColorEnum.WHITE);
+                else
+                    game.removePiece(ColorEnum.BLACK);
+            }
+            game.returnMovementBackwards();
+            throw new InvalidPositionException("Esta poniendo su Rey en Jaque!");
+        }
+        game.changeTurn();
+        if(game.isCheck()) {
             throw new InvalidPositionException(UserInterface.CHECK_MESSAGE);
         }
     }
