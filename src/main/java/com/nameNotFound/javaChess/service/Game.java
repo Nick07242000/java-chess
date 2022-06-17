@@ -1,4 +1,4 @@
-package com.nameNotFound.javaChess;
+package com.nameNotFound.javaChess.service;
 
 import java.util.ArrayList;
 

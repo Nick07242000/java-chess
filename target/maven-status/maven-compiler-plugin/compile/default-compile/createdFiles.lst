@@ -1,0 +1,7 @@
+com\nameNotFound\javaChess\utils\patterns\factory\impl\PieceFactory.class
+com\nameNotFound\javaChess\service\Game.class
+com\nameNotFound\javaChess\utils\patterns\factory\Factory.class
+com\nameNotFound\javaChess\utils\Movement.class
+com\nameNotFound\javaChess\service\GameService.class
+com\nameNotFound\javaChess\utils\patterns\factory\impl\UIFactory.class
+com\nameNotFound\javaChess\exceptions\InvalidPositionException.class
