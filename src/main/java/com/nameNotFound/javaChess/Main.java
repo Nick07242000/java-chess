@@ -9,15 +9,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         UIFactory uiFactory = UIFactory.getInstance();
-        System.out.println("Como desea visualizar la aplicacion?");
+        System.out.println("|============================================|");
+        System.out.println("|    ¿Como desea visualizar la aplicación?   |");
+        System.out.println("|                                            |");
+        //System.out.println("| 'window'  --> Vista por Ventanas           |");
+        System.out.println("| 'console' --> Vista por Consola            |");
+        System.out.println("|============================================|");
         Scanner scanner = new Scanner(System.in);
         UserInterface userInterface = uiFactory.build(scanner.nextLine());
         Game game = Game.getInstance();
         game.attach(userInterface);
-        while(!game.isCheckmate()) {
-            userInterface.showTurn();
-            userInterface.movePiece();
-        }
-        System.out.println(UserInterface.CHECK_MESSAGE);
+        userInterface.play();
     }
 }

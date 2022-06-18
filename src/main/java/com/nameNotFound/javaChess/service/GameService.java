@@ -109,11 +109,14 @@ public class GameService {
 
     public void changeStrategy(String option) {
         switch (option) {
-            case "1" -> strategy = new StrategyZero();
-            case "2" -> strategy = new StrategyOne();
-            case "3" -> strategy = null;
+            case "1" -> strategy = StrategyZero.getInstance();
+            case "2" -> strategy = StrategyOne.getInstance();
             default -> strategy = null;
         }
+    }
+
+    public boolean isCheckmate() {
+        return game.isCheckmate();
     }
 }
 

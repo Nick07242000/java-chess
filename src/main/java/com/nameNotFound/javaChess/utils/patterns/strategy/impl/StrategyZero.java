@@ -12,6 +12,15 @@ import com.nameNotFound.javaChess.utils.enums.ColorEnum;
 import com.nameNotFound.javaChess.utils.patterns.strategy.StrategyAI;
 
 public class StrategyZero implements StrategyAI {
+    private static StrategyZero instance;
+
+    private StrategyZero() {}
+
+    public static StrategyZero getInstance() {
+        if(instance == null)
+            instance = new StrategyZero();
+        return instance;
+    }
     /*
      * selecciona una pieza que pueda ser movida, tanto como movimiento normal
      * como movimiento para tomar una rival, y realiza un movimiento dentro de
@@ -24,6 +33,12 @@ public class StrategyZero implements StrategyAI {
         Piece piece;
         Position posOne;
         Position posTwo;
+        ColorEnum com = game.getTurn();
+        ColorEnum player;
+        if(com.equals(ColorEnum.BLACK))
+            player = ColorEnum.WHITE;
+        else
+            player = ColorEnum.BLACK;
 
         // busco una posOne que sea una pieza propia
         do
@@ -31,17 +46,15 @@ public class StrategyZero implements StrategyAI {
                 posOne = generateRandomPosition();
                 piece = board.getPiece(posOne);
             } while (piece == null);
-        while (piece.getColor() != ColorEnum.BLACK); // la COM es BLACK
+        while (piece.getColor() != com); // la COM es BLACK
 
-        // busco una posTwo que sea relizable
+        // busco una posTwo que sea realizable
         do {
             posTwo = generateRandomPosition();
         } while (!this.isValidMovement(posOne, posTwo));
         try {
             game.movePiece(posOne, posTwo, board.getPiece(posOne), board.getPiece(posTwo));
-        } catch (InvalidPositionException e) {
-
-        }
+        } catch (InvalidPositionException ignored) {}
     }
 
     /*
@@ -58,9 +71,9 @@ public class StrategyZero implements StrategyAI {
         ArrayList<Position> possible_movements = Game.getInstance().getBoard().getPiece(posOne).possibleMovements(posOne);
         ArrayList<Position> possible_takes = Game.getInstance().getBoard().getPiece(posOne).possibleTakes(posOne);
         if (SearchArray.searchPositionInArray(possible_takes, posTwo) && Game.getInstance().getBoard().getPiece(posTwo) != null)
-            return Game.getInstance().analizeTrajectory(posOne, posTwo);
+            return Game.getInstance().analyzeTrajectory(posOne, posTwo);
         else if (SearchArray.searchPositionInArray(possible_movements, posTwo) && Game.getInstance().getBoard().getPiece(posTwo) == null)
-            return Game.getInstance().analizeTrajectory(posOne, posTwo);
+            return Game.getInstance().analyzeTrajectory(posOne, posTwo);
         else
             return false;
     }

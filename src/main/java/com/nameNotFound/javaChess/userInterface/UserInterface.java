@@ -17,4 +17,5 @@ public abstract class UserInterface implements Observer {
     public abstract void showTakenPieces();
     public abstract void movePiece();
     public abstract void showTurn();
+    public abstract void play();
 }
