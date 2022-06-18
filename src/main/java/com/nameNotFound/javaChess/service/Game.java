@@ -37,7 +37,7 @@ public class Game extends Observable {
         return instance;
     }
 
-    //Getters And Setters
+    // Getters & Setters
 
     public Board getBoard() {
         return board;
@@ -62,7 +62,7 @@ public class Game extends Observable {
             this.whitePiecesTaken.remove(whitePiecesTaken.size()-1);
     }
 
-    //Methods
+    // Methods
 
     public void initializeBoard() {
         String[] piecesWhite = {"rook_w","knight_w","bishop_w","king_w","queen_w","bishop_w","knight_w","rook_w"};
@@ -145,8 +145,7 @@ public class Game extends Observable {
                     case "ur" -> {
                         positions.add(new Position(3, 0));
                         positions.add(new Position(4, 0));
-                        positions.
-                        add(new Position(5, 0));
+                        positions.add(new Position(5, 0));
                     }
                     case "br" -> {
                         positions.add(new Position(4, 7));
@@ -239,7 +238,7 @@ public class Game extends Observable {
         notifyObs();
     }
 
-    //Logic Helpers
+    // Logic Helpers
 
     /*
      * verifica que, si la ficha realiza una trayectoria larga, no colisione con otras piezas en el trayecto,
