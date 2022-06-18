@@ -92,11 +92,8 @@ public class Game extends Observable {
         }
         else if (pieceTwo != null) {
             if (isCastle(pieceOne, pieceTwo)) {
-                System.out.println("IS CASTLE");
                 String corner = getCorner(posTwo);
-                System.out.println(corner);
                 if (canCastle(posOne, posTwo, pieceOne, pieceTwo, corner)) {
-                    System.out.println("CAN CASTLE");
                     castle(posOne, posTwo, pieceOne, pieceTwo, corner);
                     notifyObs();
                     return false;
