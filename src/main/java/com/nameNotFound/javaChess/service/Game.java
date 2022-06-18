@@ -31,16 +31,13 @@ public class Game extends Observable {
         notifyObs();
     }
 
-    /*
-     * patron de diseño Singleton
-     */
     public static Game getInstance() {
         if(instance == null)
             instance = new Game();
         return instance;
     }
 
-    // Getters & Setters
+    //Getters And Setters
 
     public Board getBoard() {
         return board;
@@ -65,7 +62,7 @@ public class Game extends Observable {
             this.whitePiecesTaken.remove(whitePiecesTaken.size()-1);
     }
 
-    // Methods
+    //Methods
 
     public void initializeBoard() {
         String[] piecesWhite = {"rook_w","knight_w","bishop_w","king_w","queen_w","bishop_w","knight_w","rook_w"};
@@ -87,7 +84,7 @@ public class Game extends Observable {
             turn = ColorEnum.WHITE;
     }
 
-    public boolean movePiece(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo) throws InvalidPositionException {
+    public boolean movePiece(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo) throws InvalidPositionException{
         Movement movement = new Movement(posOne, posTwo, board.getPiece(posOne).getWasMoved());
         boolean takePiece = false;
         if (!analizeTrajectory(posOne, posTwo)) {
@@ -98,7 +95,10 @@ public class Game extends Observable {
                 String corner = getCorner(posTwo);
                 if (canCastle(posOne, posTwo, pieceOne, pieceTwo, corner)) {
                     castle(posOne, posTwo, pieceOne, pieceTwo, corner);
+                    notifyObs();
                     return false;
+                } else {
+                    throw new InvalidPositionException("No cumple con las condiciones de Enroque!");
                 }
             }
             if (turn.equals(ColorEnum.BLACK))
@@ -119,7 +119,7 @@ public class Game extends Observable {
     }
 
     public String getCorner(Position pos) {
-        if (pos.getY() == 0) {
+        if (pos.getX() == 0) {
             if(turn.equals(ColorEnum.BLACK))
                 return "ul";
             return "bl";
@@ -136,27 +136,30 @@ public class Game extends Observable {
                 ArrayList<Position> positions = new ArrayList<>();
                 switch (corner) {
                     case "ul" -> {
+                        positions.add(new Position(0, 0));
                         positions.add(new Position(1, 0));
                         positions.add(new Position(2, 0));
                         positions.add(new Position(3, 0));
                     }
                     case "bl" -> {
+                        positions.add(new Position(0, 7));
+                        positions.add(new Position(1, 7));
                         positions.add(new Position(2, 7));
                         positions.add(new Position(3, 7));
-                        positions.add(new Position(4, 7));
                     }
                     case "ur" -> {
                         positions.add(new Position(3, 0));
                         positions.add(new Position(4, 0));
                         positions.add(new Position(5, 0));
+                        positions.add(new Position(6, 0));
+                        positions.add(new Position(7, 0));
                     }
                     case "br" -> {
+                        positions.add(new Position(3, 7));
                         positions.add(new Position(4, 7));
                         positions.add(new Position(5, 7));
                         positions.add(new Position(6, 7));
-                    }
-                    default -> {
-
+                        positions.add(new Position(7, 7));
                     }
                 }
                 return !isAttacked(positions);
@@ -168,31 +171,28 @@ public class Game extends Observable {
     public void castle(Position kingPos, Position rookPos, Piece king, Piece rook, String corner) {
         switch (corner) {
             case "ul" -> {
-                movements.add(new Movement(rookPos, new Position(0,2), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(0,2));
-                movements.add(new Movement(kingPos, new Position(0,1), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(0,1));
+                movements.add(new Movement(rookPos, new Position(2,0), rook.getWasMoved()));
+                board.movePiece(rookPos, new Position(2,0));
+                movements.add(new Movement(kingPos, new Position(1,0), king.getWasMoved()));
+                board.movePiece(kingPos, new Position(1,0));
             }
             case "ur" -> {
-                movements.add(new Movement(rookPos, new Position(0,4), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(0,4));
-                movements.add(new Movement(kingPos, new Position(0,5), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(0,5));
+                movements.add(new Movement(rookPos, new Position(4,0), rook.getWasMoved()));
+                board.movePiece(rookPos, new Position(4,0));
+                movements.add(new Movement(kingPos, new Position(5,0), king.getWasMoved()));
+                board.movePiece(kingPos, new Position(5,0));
             }
             case "bl" -> {
-                movements.add(new Movement(rookPos, new Position(7,2), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(7,2));
-                movements.add(new Movement(kingPos, new Position(7,1), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(7,1));
+                movements.add(new Movement(rookPos, new Position(2,7), rook.getWasMoved()));
+                board.movePiece(rookPos, new Position(2,7));
+                movements.add(new Movement(kingPos, new Position(1,7), king.getWasMoved()));
+                board.movePiece(kingPos, new Position(1,7));
             }
             case "br" -> {
-                movements.add(new Movement(rookPos, new Position(7,4), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(7,4));
-                movements.add(new Movement(kingPos, new Position(7,5), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(7,5));
-            }
-            default -> {
-
+                movements.add(new Movement(rookPos, new Position(4,7), rook.getWasMoved()));
+                board.movePiece(rookPos, new Position(4,7));
+                movements.add(new Movement(kingPos, new Position(5,7), king.getWasMoved()));
+                board.movePiece(kingPos, new Position(5,7));
             }
         }
     }
@@ -241,13 +241,13 @@ public class Game extends Observable {
         notifyObs();
     }
 
-    // Logic Helpers
+    //Logic Helpers
 
     /*
      * verifica que, si la ficha realiza una trayectoria larga, no colisione con otras piezas en el trayecto,
      * a excepcion de la posicion final donde puede llegar a haber una pieza cualquiera
      */
-    public boolean analizeTrajectory(Position posOne, Position posTwo) {
+    private boolean analizeTrajectory(Position posOne, Position posTwo) {
         if (board.getPiece(posOne).getLongMovement()) { //veo si la pieza realiza movimientos de trayectoria
             boolean no_obstruction = true;
             int x1 = posOne.getX();
@@ -353,7 +353,7 @@ public class Game extends Observable {
      * se le pasa una posicion por argumento y devuelve un booleano en el caso de
      * que esa posicion se vea atacada por alguna pieza enemiga
      */
-    public boolean isAttacked(Position pos) {
+    private boolean isAttacked(Position pos) {
         ColorEnum opponent;
         ArrayList<Position> positions = new ArrayList<>();
         if (turn.equals(ColorEnum.BLACK))
@@ -375,7 +375,7 @@ public class Game extends Observable {
      * se le pasa un arraylist de posiciones por argumento y devuelve un booleano en el caso de
      * que alguna de esas posiciones se vea atacada po alguna pieza enemiga
      */
-    public boolean isAttacked(ArrayList<Position> pos) {
+    private boolean isAttacked(ArrayList<Position> pos) {
         ColorEnum opponent;
         ArrayList<Position> positions = new ArrayList<>();
         if (turn.equals(ColorEnum.BLACK))
@@ -387,10 +387,11 @@ public class Game extends Observable {
                 if (board.getPiece(new Position(i, j)) != null)
                     if (board.getPiece(new Position(i, j)).getColor().equals(opponent))
                         positions.add(new Position(i, j));
-        for (Position position_to_analize : pos) //analizo los movimientos de todas las fichas enemigas recopiladas y debo corroborar si atacan las posiciones pasadas por parametro
+        for (Position position_to_analyze : pos) //analizo los movimientos de todas las fichas enemigas recopiladas y debo corroborar si atacan las posiciones pasadas por parametro
             for (Position rival_piece : positions)
-                if (analizeTrajectory(rival_piece, position_to_analize))
+                if (isValidMovement(rival_piece, position_to_analyze)) {
                     return true;
+                }
         return false;
     }
 
