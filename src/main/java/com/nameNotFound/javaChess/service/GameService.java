@@ -61,23 +61,29 @@ public class GameService {
                 throw new InvalidPositionException("Esta Pieza no puede realizar ese movimiento!");
         }
         else if (pieceTwo.getColor().equals(game.getTurn())) {
-            if (!pieceOne.getName().equals(PieceEnum.KING) && !pieceTwo.getName().equals(PieceEnum.ROOK)) {
-                if (pieceOne.getName().equals(PieceEnum.ROOK) && !pieceTwo.getName().equals(PieceEnum.KING))
-                    throw new InvalidPositionException("Para Enrocar seleccione primero el Rey, y luego la Torre");
+//            if (!pieceOne.getName().equals(PieceEnum.KING) && !pieceTwo.getName().equals(PieceEnum.ROOK)) {
+//                if (pieceOne.getName().equals(PieceEnum.ROOK) && !pieceTwo.getName().equals(PieceEnum.KING))
+//                    throw new InvalidPositionException("Para Enrocar seleccione primero el Rey, y luego la Torre");
                 throw new InvalidPositionException("Esa es su Pieza!");
-            }
+//            }
         }
         else if (!SearchArray.searchPositionInArray(possibleTakes, pos2))
             throw new InvalidPositionException("No puede tomar esa Pieza!");
         wasPieceTaken = game.movePiece(pos1, pos2, pieceOne, pieceTwo);
         if (game.isCheck()) {
-            if (wasPieceTaken) {
-                if (game.getTurn().equals(ColorEnum.BLACK))
-                    game.removePiece(ColorEnum.WHITE);
-                else
-                    game.removePiece(ColorEnum.BLACK);
-            }
             game.returnMovementBackwards();
+            if (wasPieceTaken) {
+                if (game.getTurn().equals(ColorEnum.BLACK)) {
+                    Piece removedPiece = game.getWhitePiecesTaken().get(game.getWhitePiecesTaken().size()-1);
+                    board.setPiece(removedPiece,pos2);
+                    game.removePiece(ColorEnum.WHITE);
+                }
+                else {
+                    Piece removedPiece = game.getBlackPiecesTaken().get(game.getBlackPiecesTaken().size()-1);
+                    board.setPiece(removedPiece,pos2);
+                    game.removePiece(ColorEnum.BLACK);
+                }
+            }
             throw new InvalidPositionException("Esta poniendo su Rey en Jaque!");
         }
         game.changeTurn();

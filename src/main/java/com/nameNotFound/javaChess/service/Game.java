@@ -91,13 +91,13 @@ public class Game extends Observable {
             throw new InvalidPositionException("Hay piezas en el camino!");
         }
         else if (pieceTwo != null) {
-            if (isCastle(pieceOne, pieceTwo)) {
-                String corner = getCorner(posTwo);
-                if (canCastle(posOne, posTwo, pieceOne, pieceTwo, corner)) {
-                    castle(posOne, posTwo, pieceOne, pieceTwo, corner);
-                    return false;
-                }
-            }
+//            if (isCastle(pieceOne, pieceTwo)) {
+//                String corner = getCorner(posTwo);
+//                if (canCastle(posOne, posTwo, pieceOne, pieceTwo, corner)) {
+//                    castle(posOne, posTwo, pieceOne, pieceTwo, corner);
+//                    return false;
+//                }
+//            }
             if (turn.equals(ColorEnum.BLACK))
                 whitePiecesTaken.add(board.getPiece(posTwo));
             else
@@ -111,89 +111,89 @@ public class Game extends Observable {
     }
 
     //Castling
-    public boolean isCastle(Piece pieceOne, Piece pieceTwo) {
-        return pieceOne.getName().equals(PieceEnum.KING) && pieceTwo.getName().equals(PieceEnum.ROOK);
-    }
-
-    public String getCorner(Position pos) {
-        if (pos.getY() == 0) {
-            if(turn.equals(ColorEnum.BLACK))
-                return "ul";
-            return "bl";
-        } else {
-            if(turn.equals(ColorEnum.BLACK))
-                return "ur";
-            return "br";
-        }
-    }
-
-    public boolean canCastle(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo, String corner) {
-        if (analizeTrajectory(posTwo, posOne)) {
-            if (!pieceOne.getWasMoved() && !pieceTwo.getWasMoved()) {
-                ArrayList<Position> positions = new ArrayList<>();
-                switch (corner) {
-                    case "ul" -> {
-                        positions.add(new Position(1, 0));
-                        positions.add(new Position(2, 0));
-                        positions.add(new Position(3, 0));
-                    }
-                    case "bl" -> {
-                        positions.add(new Position(2, 7));
-                        positions.add(new Position(3, 7));
-                        positions.add(new Position(4, 7));
-                    }
-                    case "ur" -> {
-                        positions.add(new Position(3, 0));
-                        positions.add(new Position(4, 0));
-                        positions.
-                        add(new Position(5, 0));
-                    }
-                    case "br" -> {
-                        positions.add(new Position(4, 7));
-                        positions.add(new Position(5, 7));
-                        positions.add(new Position(6, 7));
-                    }
-                    default -> {
-
-                    }
-                }
-                return !isAttacked(positions);
-            }
-        }
-        return false;
-    }
-
-    public void castle(Position kingPos, Position rookPos, Piece king, Piece rook, String corner) {
-        switch (corner) {
-            case "ul" -> {
-                movements.add(new Movement(rookPos, new Position(0,2), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(0,2));
-                movements.add(new Movement(kingPos, new Position(0,1), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(0,1));
-            }
-            case "ur" -> {
-                movements.add(new Movement(rookPos, new Position(0,4), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(0,4));
-                movements.add(new Movement(kingPos, new Position(0,5), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(0,5));
-            }
-            case "bl" -> {
-                movements.add(new Movement(rookPos, new Position(7,2), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(7,2));
-                movements.add(new Movement(kingPos, new Position(7,1), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(7,1));
-            }
-            case "br" -> {
-                movements.add(new Movement(rookPos, new Position(7,4), rook.getWasMoved()));
-                board.movePiece(rookPos, new Position(7,4));
-                movements.add(new Movement(kingPos, new Position(7,5), king.getWasMoved()));
-                board.movePiece(kingPos, new Position(7,5));
-            }
-            default -> {
-
-            }
-        }
-    }
+//    public boolean isCastle(Piece pieceOne, Piece pieceTwo) {
+//        return pieceOne.getName().equals(PieceEnum.KING) && pieceTwo.getName().equals(PieceEnum.ROOK);
+//    }
+//
+//    public String getCorner(Position pos) {
+//        if (pos.getY() == 0) {
+//            if(turn.equals(ColorEnum.BLACK))
+//                return "ul";
+//            return "bl";
+//        } else {
+//            if(turn.equals(ColorEnum.BLACK))
+//                return "ur";
+//            return "br";
+//        }
+//    }
+//
+//    public boolean canCastle(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo, String corner) {
+//        if (analizeTrajectory(posTwo, posOne)) {
+//            if (!pieceOne.getWasMoved() && !pieceTwo.getWasMoved()) {
+//                ArrayList<Position> positions = new ArrayList<>();
+//                switch (corner) {
+//                    case "ul" -> {
+//                        positions.add(new Position(1, 0));
+//                        positions.add(new Position(2, 0));
+//                        positions.add(new Position(3, 0));
+//                    }
+//                    case "bl" -> {
+//                        positions.add(new Position(2, 7));
+//                        positions.add(new Position(3, 7));
+//                        positions.add(new Position(4, 7));
+//                    }
+//                    case "ur" -> {
+//                        positions.add(new Position(3, 0));
+//                        positions.add(new Position(4, 0));
+//                        positions.
+//                        add(new Position(5, 0));
+//                    }
+//                    case "br" -> {
+//                        positions.add(new Position(4, 7));
+//                        positions.add(new Position(5, 7));
+//                        positions.add(new Position(6, 7));
+//                    }
+//                    default -> {
+//
+//                    }
+//                }
+//                return !isAttacked(positions);
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public void castle(Position kingPos, Position rookPos, Piece king, Piece rook, String corner) {
+//        switch (corner) {
+//            case "ul" -> {
+//                movements.add(new Movement(rookPos, new Position(0,2), rook.getWasMoved()));
+//                board.movePiece(rookPos, new Position(0,2));
+//                movements.add(new Movement(kingPos, new Position(0,1), king.getWasMoved()));
+//                board.movePiece(kingPos, new Position(0,1));
+//            }
+//            case "ur" -> {
+//                movements.add(new Movement(rookPos, new Position(0,4), rook.getWasMoved()));
+//                board.movePiece(rookPos, new Position(0,4));
+//                movements.add(new Movement(kingPos, new Position(0,5), king.getWasMoved()));
+//                board.movePiece(kingPos, new Position(0,5));
+//            }
+//            case "bl" -> {
+//                movements.add(new Movement(rookPos, new Position(7,2), rook.getWasMoved()));
+//                board.movePiece(rookPos, new Position(7,2));
+//                movements.add(new Movement(kingPos, new Position(7,1), king.getWasMoved()));
+//                board.movePiece(kingPos, new Position(7,1));
+//            }
+//            case "br" -> {
+//                movements.add(new Movement(rookPos, new Position(7,4), rook.getWasMoved()));
+//                board.movePiece(rookPos, new Position(7,4));
+//                movements.add(new Movement(kingPos, new Position(7,5), king.getWasMoved()));
+//                board.movePiece(kingPos, new Position(7,5));
+//            }
+//            default -> {
+//
+//            }
+//        }
+//    }
 
     //Check
     public boolean isCheck() {
@@ -373,24 +373,24 @@ public class Game extends Observable {
      * se le pasa un arraylist de posiciones por argumento y devuelve un booleano en el caso de
      * que alguna de esas posiciones se vea atacada po alguna pieza enemiga
      */
-    private boolean isAttacked(ArrayList<Position> pos) {
-        ColorEnum opponent;
-        ArrayList<Position> positions = new ArrayList<>();
-        if (turn.equals(ColorEnum.BLACK))
-            opponent = ColorEnum.WHITE;
-        else
-            opponent = ColorEnum.BLACK;
-        for (int i = 0; i < 8; i++) //cargo todas las piezas rivales del tablero
-            for (int j = 0; j < 8; j++)
-                if (board.getPiece(new Position(i, j)) != null)
-                    if (board.getPiece(new Position(i, j)).getColor().equals(opponent))
-                        positions.add(new Position(i, j));
-        for (Position position_to_analize : pos) //analizo los movimientos de todas las fichas enemigas recopiladas y debo corroborar si atacan las posiciones pasadas por parametro
-            for (Position rival_piece : positions)
-                if (analizeTrajectory(rival_piece, position_to_analize))
-                    return true;
-        return false;
-    }
+//    private boolean isAttacked(ArrayList<Position> pos) {
+//        ColorEnum opponent;
+//        ArrayList<Position> positions = new ArrayList<>();
+//        if (turn.equals(ColorEnum.BLACK))
+//            opponent = ColorEnum.WHITE;
+//        else
+//            opponent = ColorEnum.BLACK;
+//        for (int i = 0; i < 8; i++) //cargo todas las piezas rivales del tablero
+//            for (int j = 0; j < 8; j++)
+//                if (board.getPiece(new Position(i, j)) != null)
+//                    if (board.getPiece(new Position(i, j)).getColor().equals(opponent))
+//                        positions.add(new Position(i, j));
+//        for (Position position_to_analize : pos) //analizo los movimientos de todas las fichas enemigas recopiladas y debo corroborar si atacan las posiciones pasadas por parametro
+//            for (Position rival_piece : positions)
+//                if (isValidMovement(rival_piece, position_to_analize))
+//                    return true;
+//        return false;
+//    }
 
     private boolean isValidMovement(Position posOne, Position posTwo) {
         ArrayList<Position> possibleTakes = board.getPiece(posOne).possibleTakes(posOne);
