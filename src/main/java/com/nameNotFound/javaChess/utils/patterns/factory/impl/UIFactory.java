@@ -11,7 +11,7 @@ public class UIFactory extends Factory {
     private UIFactory() {}
 
     public static UIFactory getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new UIFactory();
         return instance;
     }

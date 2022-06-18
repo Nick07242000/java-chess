@@ -247,7 +247,7 @@ public class Game extends Observable {
      * verifica que, si la ficha realiza una trayectoria larga, no colisione con otras piezas en el trayecto,
      * a excepcion de la posicion final donde puede llegar a haber una pieza cualquiera
      */
-    private boolean analizeTrajectory(Position posOne, Position posTwo) {
+    public boolean analizeTrajectory(Position posOne, Position posTwo) {
         if (board.getPiece(posOne).getLongMovement()) { //veo si la pieza realiza movimientos de trayectoria
             boolean no_obstruction = true;
             int x1 = posOne.getX();

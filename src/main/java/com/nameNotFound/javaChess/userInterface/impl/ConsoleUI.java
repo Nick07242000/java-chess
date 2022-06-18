@@ -141,12 +141,54 @@ public class ConsoleUI extends UserInterface {
     @Override
     public void movePiece() {
         String posOne = validatePosition(PIECE_TO_MOVE_MESSAGE);
-        String posTwo = validatePosition(WHERE_TO_MOVE_MESSAGE);
-        try {
-            gameService.movePiece(posOne,posTwo);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (posOne.equals("menu"))
+            showMenu();
+        else {
+            String posTwo = validatePosition(WHERE_TO_MOVE_MESSAGE);
+            try {
+                gameService.movePiece(posOne, posTwo);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+    }
+
+    public void showMenu() {
+        clearConsole();
+        System.out.println("|====================================|");
+        System.out.println("|              - MENU -              |");
+        System.out.println("|                                    |");
+        System.out.println("| '1' --> Cambiar estrategia AI      |");
+        System.out.println("| '2' --> Retornar                   |");
+        System.out.println("|====================================|");
+        System.out.print("\nopcion: ");
+        String option = getInput();
+        switch (option) {
+            case "1" -> menuChangeStrategy();
+            case "2" -> update();
+            default -> update();
+        }
+        if (option.equals("2")) {
+            showTurn();
+            movePiece();
+        }
+    }
+
+    public void menuChangeStrategy() {
+        clearConsole();
+        System.out.println("|====================================|");
+        System.out.println("|            - MENU -                |");
+        System.out.println("|                                    |");
+        System.out.println("| '1' --> Estrategia facil           |");
+        System.out.println("| '2' --> Estrategia dificil         |");
+        System.out.println("| '3' --> Modo PvP                   |");
+        System.out.println("|====================================|");
+        System.out.print("\nopcion: ");
+        String option = getInput();
+        gameService.changeStrategy(option);
+        update();
+        showTurn();
+        movePiece();
     }
 
     @Override
@@ -169,20 +211,12 @@ public class ConsoleUI extends UserInterface {
             valid = true;
             requestUserInput(message);
             pos = getInput().toLowerCase().trim();
-            if (pos.length() != 2) {
+            if (pos.equals("menu"))
+                valid = true;
+            else if (pos.length() != 2) {
                 valid = false;
                 System.out.println(INVALID_POSITION_MESSAGE);
-            }
-
-            /*
-            char letter = pos.charAt(0);
-            int number = pos.charAt(1);
-            if (letter < 'a' || letter > 'h' || number > 8) {
-                valid = false;
-                System.out.println(INVALID_POSITION_MESSAGE);
-            }
-            */
-            
+            }            
         } while (!valid);
         return pos;
     }
