@@ -14,9 +14,10 @@ public class Main {
         UserInterface userInterface = uiFactory.build(scanner.nextLine());
         Game game = Game.getInstance();
         game.attach(userInterface);
-        while(true) {
+        while(!game.isCheckmate()) {
             userInterface.showTurn();
             userInterface.movePiece();
         }
+        System.out.println(UserInterface.CHECK_MESSAGE);
     }
 }
