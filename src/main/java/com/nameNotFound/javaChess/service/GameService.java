@@ -1,5 +1,7 @@
 package com.nameNotFound.javaChess.service;
 
+import java.util.ArrayList;
+
 import com.nameNotFound.javaChess.exceptions.InvalidPositionException;
 import com.nameNotFound.javaChess.model.Board;
 import com.nameNotFound.javaChess.model.pieces.Piece;
@@ -8,17 +10,25 @@ import com.nameNotFound.javaChess.utils.Position;
 import com.nameNotFound.javaChess.utils.SearchArray;
 import com.nameNotFound.javaChess.utils.enums.ColorEnum;
 import com.nameNotFound.javaChess.utils.enums.PieceEnum;
-
-import java.util.ArrayList;
+import com.nameNotFound.javaChess.utils.patterns.strategy.StrategyAI;
+import com.nameNotFound.javaChess.utils.patterns.strategy.impl.StrategyZero;
+import com.nameNotFound.javaChess.utils.patterns.strategy.impl.StrategyOne;
 
 public class GameService {
-    private final Game game = Game.getInstance();
+    private final Game game;
+    private static StrategyAI strategy;
     private static GameService instance;
 
     private GameService() {
-
+        game = Game.getInstance();
+        strategy = null;
     }
 
+    // Getters & Setters
+
+    /*
+     * patron de diseño Singleton
+     */
     public static GameService getInstance() {
         if (instance == null)
             instance = new GameService();
@@ -39,9 +49,11 @@ public class GameService {
         return game.getWhitePiecesTaken();
     }
 
+    // Methods
+
     public void movePiece(String posOne, String posTwo) throws InvalidPositionException {
-        Position pos1 = new Position(posOne.charAt(0) - 97, 7 - (posOne.charAt(1) - 49));
-        Position pos2 = new Position(posTwo.charAt(0) - 97, 7 - (posTwo.charAt(1) - 49));
+        Position pos1 = new Position(posOne.charAt(0)-97, 7-(posOne.charAt(1)-49));
+        Position pos2 = new Position(posTwo.charAt(0)-97, 7-(posTwo.charAt(1)-49));
         Board board = getBoard();
         Piece pieceOne = board.getPiece(pos1);
         Piece pieceTwo = board.getPiece(pos2);
@@ -87,8 +99,20 @@ public class GameService {
             throw new InvalidPositionException("Esta poniendo su Rey en Jaque!");
         }
         game.changeTurn();
-        if (game.isCheck()) {
+        if (game.isCheck())
             throw new InvalidPositionException(UserInterface.CHECK_MESSAGE);
+        if (strategy != null) {
+            strategy.play();
+            game.changeTurn();
+        }
+    }
+
+    public void changeStrategy(String option) {
+        switch (option) {
+            case "1" -> strategy = new StrategyZero();
+            case "2" -> strategy = new StrategyOne();
+            case "3" -> strategy = null;
+            default -> strategy = null;
         }
     }
 }
