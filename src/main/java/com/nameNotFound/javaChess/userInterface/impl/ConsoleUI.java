@@ -42,7 +42,7 @@ public class ConsoleUI extends UserInterface {
 
     @Override
     public void requestUserInput(String message) {
-        System.out.println(message);
+        System.out.print(message + " ");
     }
 
     @Override
@@ -135,7 +135,7 @@ public class ConsoleUI extends UserInterface {
             System.out.print("|");
         else
             System.out.print("||");
-        System.out.println(" ");
+        System.out.println("\n");
     }
 
     @Override
