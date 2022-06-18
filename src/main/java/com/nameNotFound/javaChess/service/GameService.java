@@ -62,7 +62,7 @@ public class GameService {
         }
         else if (pieceTwo.getColor().equals(game.getTurn())) {
             if (!pieceOne.getName().equals(PieceEnum.KING) && !pieceTwo.getName().equals(PieceEnum.ROOK)) {
-                if (pieceOne.getName().equals(PieceEnum.ROOK) && !pieceTwo.getName().equals(PieceEnum.KING))
+                if (pieceOne.getName().equals(PieceEnum.ROOK) && pieceTwo.getName().equals(PieceEnum.KING))
                     throw new InvalidPositionException("Para Enrocar seleccione primero el Rey, y luego la Torre");
                 throw new InvalidPositionException("Esa es su Pieza!");
             }
