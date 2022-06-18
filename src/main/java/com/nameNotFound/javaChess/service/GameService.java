@@ -26,6 +26,9 @@ public class GameService {
 
     // Getters & Setters
 
+    /*
+     * patron de diseño Singleton
+     */
     public static GameService getInstance() {
         if (instance == null)
             instance = new GameService();
@@ -47,10 +50,6 @@ public class GameService {
     }
 
     // Methods
-
-    public void playTurn() {
-        
-    }
 
     public void movePiece(String posOne, String posTwo) throws InvalidPositionException {
         Position pos1 = new Position(posOne.charAt(0)-97, 7-(posOne.charAt(1)-49));
@@ -94,8 +93,20 @@ public class GameService {
             throw new InvalidPositionException("Esta poniendo su Rey en Jaque!");
         }
         game.changeTurn();
-        if (game.isCheck()) {
+        if (game.isCheck())
             throw new InvalidPositionException(UserInterface.CHECK_MESSAGE);
+        if (strategy != null) {
+            strategy.play();
+            game.changeTurn();
+        }
+    }
+
+    public void changeStrategy(String option) {
+        switch (option) {
+            case "1" -> strategy = new StrategyZero();
+            case "2" -> strategy = new StrategyOne();
+            case "3" -> strategy = null;
+            default -> strategy = null;
         }
     }
 }

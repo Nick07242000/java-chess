@@ -31,6 +31,9 @@ public class Game extends Observable {
         notifyObs();
     }
 
+    /*
+     * patron de diseño Singleton
+     */
     public static Game getInstance() {
         if(instance == null)
             instance = new Game();
@@ -84,7 +87,7 @@ public class Game extends Observable {
             turn = ColorEnum.WHITE;
     }
 
-    public boolean movePiece(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo) throws InvalidPositionException{
+    public boolean movePiece(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo) throws InvalidPositionException {
         Movement movement = new Movement(posOne, posTwo, board.getPiece(posOne).getWasMoved());
         boolean takePiece = false;
         if (!analizeTrajectory(posOne, posTwo)) {
@@ -244,7 +247,7 @@ public class Game extends Observable {
      * verifica que, si la ficha realiza una trayectoria larga, no colisione con otras piezas en el trayecto,
      * a excepcion de la posicion final donde puede llegar a haber una pieza cualquiera
      */
-    private boolean analizeTrajectory(Position posOne, Position posTwo) {
+    public boolean analizeTrajectory(Position posOne, Position posTwo) {
         if (board.getPiece(posOne).getLongMovement()) { //veo si la pieza realiza movimientos de trayectoria
             boolean no_obstruction = true;
             int x1 = posOne.getX();
@@ -350,7 +353,7 @@ public class Game extends Observable {
      * se le pasa una posicion por argumento y devuelve un booleano en el caso de
      * que esa posicion se vea atacada por alguna pieza enemiga
      */
-    private boolean isAttacked(Position pos) {
+    public boolean isAttacked(Position pos) {
         ColorEnum opponent;
         ArrayList<Position> positions = new ArrayList<>();
         if (turn.equals(ColorEnum.BLACK))
@@ -372,7 +375,7 @@ public class Game extends Observable {
      * se le pasa un arraylist de posiciones por argumento y devuelve un booleano en el caso de
      * que alguna de esas posiciones se vea atacada po alguna pieza enemiga
      */
-    private boolean isAttacked(ArrayList<Position> pos) {
+    public boolean isAttacked(ArrayList<Position> pos) {
         ColorEnum opponent;
         ArrayList<Position> positions = new ArrayList<>();
         if (turn.equals(ColorEnum.BLACK))
