@@ -9,12 +9,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         UIFactory uiFactory = UIFactory.getInstance();
-        System.out.println("|============================================|");
-        System.out.println("|    ¿Como desea visualizar la aplicación?   |");
-        System.out.println("|                                            |");
-        //System.out.println("| 'window'  --> Vista por Ventanas           |");
-        System.out.println("| 'console' --> Vista por Consola            |");
-        System.out.println("|============================================|");
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        System.out.println("||=============================================||");
+        System.out.println("||    ¿Como desea visualizar la aplicación?    ||");
+        System.out.println("||                                             ||");
+        //System.out.println("|| 'window'  --> Vista por Ventanas            ||");
+        System.out.println("|| 'console' --> Vista por Consola             ||");
+        System.out.println("||=============================================||");
+        System.out.print("\nopcion: ");
         Scanner scanner = new Scanner(System.in);
         UserInterface userInterface = uiFactory.build(scanner.nextLine());
         Game game = Game.getInstance();

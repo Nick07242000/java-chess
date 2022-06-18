@@ -42,7 +42,7 @@ public class StrategyOne implements StrategyAI{
                 posOne = generateRandomPosition();
                 piece = board.getPiece(posOne);
             } while (piece == null);
-        while (piece.getColor() != com); // la COM es BLACK
+        while (piece.getColor() != com);
 
         // busco una posTwo que sea realizable
         do {
@@ -69,8 +69,11 @@ public class StrategyOne implements StrategyAI{
      * analiza si el movimiento entre posOne y posTwo es valido para la pieza en el tablero
      */
     private boolean isValidMovement(Position posOne, Position posTwo) {
+        ArrayList<Position> possible_movements = Game.getInstance().getBoard().getPiece(posOne).possibleMovements(posOne);
         ArrayList<Position> possible_takes = Game.getInstance().getBoard().getPiece(posOne).possibleTakes(posOne);
-        if (SearchArray.searchPositionInArray(possible_takes, posTwo))
+        if (SearchArray.searchPositionInArray(possible_takes, posTwo) && Game.getInstance().getBoard().getPiece(posTwo) != null)
+            return Game.getInstance().analyzeTrajectory(posOne, posTwo);
+        else if (SearchArray.searchPositionInArray(possible_movements, posTwo) && Game.getInstance().getBoard().getPiece(posTwo) == null)
             return Game.getInstance().analyzeTrajectory(posOne, posTwo);
         else
             return false;

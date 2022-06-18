@@ -46,7 +46,7 @@ public class StrategyZero implements StrategyAI {
                 posOne = generateRandomPosition();
                 piece = board.getPiece(posOne);
             } while (piece == null);
-        while (piece.getColor() != com); // la COM es BLACK
+        while (piece.getColor() != com);
 
         // busco una posTwo que sea realizable
         do {

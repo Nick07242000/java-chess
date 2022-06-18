@@ -25,10 +25,10 @@ public class ConsoleUI extends UserInterface {
 
     public Piece requestToChoosePiece(ColorEnum c) {
         Piece piece;
-        System.out.println("'1' ----> Bishop");
-        System.out.println("'2' ----> Knight");
-        System.out.println("'3' ----> Rook");
-        System.out.println("'4' ----> Queen");
+        System.out.println("'1' --> Bishop");
+        System.out.println("'2' --> Knight");
+        System.out.println("'3' --> Rook");
+        System.out.println("'4' --> Queen");
         System.out.println("(default) Queen\n");
         requestUserInput(CHOOSE_PIECE_MESSAGE);
         String input = getInput();
@@ -156,12 +156,12 @@ public class ConsoleUI extends UserInterface {
 
     public void showMenu() {
         clearConsole();
-        System.out.println("|====================================|");
-        System.out.println("|              - MENU -              |");
-        System.out.println("|                                    |");
-        System.out.println("| '1' --> Cambiar Modo               |");
-        System.out.println("| '2' --> Retornar                   |");
-        System.out.println("|====================================|");
+        System.out.println("||====================================||");
+        System.out.println("||            | - MENU - |            ||");
+        System.out.println("||                                    ||");
+        System.out.println("|| '1' --> Cambiar Modo               ||");
+        System.out.println("|| '2' --> Retornar                   ||");
+        System.out.println("||====================================||");
         System.out.print("\nOpcion: ");
         String option = getInput();
         if ("1".equals(option)) {
@@ -175,14 +175,14 @@ public class ConsoleUI extends UserInterface {
 
     public void menuChangeStrategy() {
         clearConsole();
-        System.out.println("|====================================|");
-        System.out.println("|            - MENU -                |");
-        System.out.println("|                                    |");
-        System.out.println("| '1' --> Estrategia facil           |");
-        System.out.println("| '2' --> Estrategia dificil         |");
-        System.out.println("| '3' --> Modo PvP                   |");
-        System.out.println("|====================================|");
-        System.out.print("\nopcion: ");
+        System.out.println("||====================================||");
+        System.out.println("||            | - MENU - |            ||");
+        System.out.println("||                                    ||");
+        System.out.println("|| '1' --> Estrategia facil           ||");
+        System.out.println("|| '2' --> Estrategia dificil         ||");
+        System.out.println("|| '3' --> Modo PvP                   ||");
+        System.out.println("||====================================||");
+        System.out.print("\nOpcion: ");
         String option = getInput();
         gameService.changeStrategy(option);
         update();
