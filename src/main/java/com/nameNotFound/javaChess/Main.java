@@ -1,9 +1,7 @@
 package com.nameNotFound.javaChess;
 
 import com.nameNotFound.javaChess.service.Game;
-import com.nameNotFound.javaChess.service.GameService;
 import com.nameNotFound.javaChess.userInterface.UserInterface;
-import com.nameNotFound.javaChess.utils.patterns.factory.Factory;
 import com.nameNotFound.javaChess.utils.patterns.factory.impl.UIFactory;
 
 import java.util.Scanner;
@@ -11,15 +9,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         UIFactory uiFactory = UIFactory.getInstance();
-        System.out.println("Como desea visualizar la aplicacion?");
+        System.out.println("|============================================|");
+        System.out.println("|    ¿Como desea visualizar la aplicación?   |");
+        System.out.println("|                                            |");
+        //System.out.println("| 'window'  --> Vista por Ventanas           |");
+        System.out.println("| 'console' --> Vista por Consola            |");
+        System.out.println("|============================================|");
         Scanner scanner = new Scanner(System.in);
         UserInterface userInterface = uiFactory.build(scanner.nextLine());
         Game game = Game.getInstance();
         game.attach(userInterface);
-        while (!game.isCheckmate()) {
-            userInterface.showTurn();
-            userInterface.movePiece();
-        }
-        System.out.println("END");
+        userInterface.play();
     }
 }

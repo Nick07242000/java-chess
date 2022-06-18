@@ -11,8 +11,11 @@ D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\service\Ga
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\utils\enums\PieceEnum.java
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\userInterface\UserInterface.java
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\utils\enums\ColorEnum.java
+D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\utils\patterns\strategy\impl\StrategyZero.java
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\model\pieces\impl\Rook.java
+D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\utils\patterns\strategy\impl\StrategyOne.java
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\model\pieces\impl\Pawn.java
+D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\utils\patterns\strategy\StrategyAI.java
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\utils\patterns\observer\Observable.java
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\utils\patterns\observer\Observer.java
 D:\College\IngSoft\JavaChess\src\main\java\com\nameNotFound\javaChess\exceptions\InvalidPositionException.java

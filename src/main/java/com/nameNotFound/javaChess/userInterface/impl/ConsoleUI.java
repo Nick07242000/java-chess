@@ -3,6 +3,7 @@ package com.nameNotFound.javaChess.userInterface.impl;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.nameNotFound.javaChess.exceptions.InvalidPositionException;
 import com.nameNotFound.javaChess.model.Board;
 import com.nameNotFound.javaChess.model.pieces.Piece;
 import com.nameNotFound.javaChess.model.pieces.impl.Bishop;
@@ -158,17 +159,15 @@ public class ConsoleUI extends UserInterface {
         System.out.println("|====================================|");
         System.out.println("|              - MENU -              |");
         System.out.println("|                                    |");
-        System.out.println("| '1' --> Cambiar estrategia AI      |");
+        System.out.println("| '1' --> Cambiar Modo               |");
         System.out.println("| '2' --> Retornar                   |");
         System.out.println("|====================================|");
-        System.out.print("\nopcion: ");
+        System.out.print("\nOpcion: ");
         String option = getInput();
-        switch (option) {
-            case "1" -> menuChangeStrategy();
-            case "2" -> update();
-            default -> update();
-        }
-        if (option.equals("2")) {
+        if ("1".equals(option)) {
+            menuChangeStrategy();
+        } else {
+            update();
             showTurn();
             movePiece();
         }
@@ -192,6 +191,16 @@ public class ConsoleUI extends UserInterface {
     }
 
     @Override
+    public void play() {
+        menuChangeStrategy();
+        while (!gameService.isCheckmate()) {
+            showTurn();
+            movePiece();
+        }
+        System.out.println(UserInterface.CHECKMATE_MESSAGE);
+    }
+
+    @Override
     public void showTurn() {
         System.out.println(TURN_MESSAGE + gameService.getTurn());
         System.out.println(" ");
@@ -211,9 +220,7 @@ public class ConsoleUI extends UserInterface {
             valid = true;
             requestUserInput(message);
             pos = getInput().toLowerCase().trim();
-            if (pos.equals("menu"))
-                valid = true;
-            else if (pos.length() != 2) {
+            if (pos.length() != 2 && !pos.equals("menu")) {
                 valid = false;
                 System.out.println(INVALID_POSITION_MESSAGE);
             }            

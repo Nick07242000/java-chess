@@ -83,13 +83,19 @@ public class GameService {
             throw new InvalidPositionException("No puede tomar esa Pieza!");
         wasPieceTaken = game.movePiece(pos1, pos2, pieceOne, pieceTwo);
         if (game.isCheck()) {
-            if (wasPieceTaken) {
-                if (game.getTurn().equals(ColorEnum.BLACK))
-                    game.removePiece(ColorEnum.WHITE);
-                else
-                    game.removePiece(ColorEnum.BLACK);
-            }
             game.returnMovementBackwards();
+            if (wasPieceTaken) {
+                if (game.getTurn().equals(ColorEnum.BLACK)) {
+                    Piece removedPiece = game.getWhitePiecesTaken().get(game.getWhitePiecesTaken().size()-1);
+                    board.setPiece(removedPiece,pos2);
+                    game.removePiece(ColorEnum.WHITE);
+                }
+                else {
+                    Piece removedPiece = game.getBlackPiecesTaken().get(game.getBlackPiecesTaken().size()-1);
+                    board.setPiece(removedPiece,pos2);
+                    game.removePiece(ColorEnum.BLACK);
+                }
+            }
             throw new InvalidPositionException("Esta poniendo su Rey en Jaque!");
         }
         game.changeTurn();
@@ -103,11 +109,14 @@ public class GameService {
 
     public void changeStrategy(String option) {
         switch (option) {
-            case "1" -> strategy = new StrategyZero();
-            case "2" -> strategy = new StrategyOne();
-            case "3" -> strategy = null;
+            case "1" -> strategy = StrategyZero.getInstance();
+            case "2" -> strategy = StrategyOne.getInstance();
             default -> strategy = null;
         }
+    }
+
+    public boolean isCheckmate() {
+        return game.isCheckmate();
     }
 }
 

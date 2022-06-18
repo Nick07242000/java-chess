@@ -17,7 +17,7 @@ import com.nameNotFound.javaChess.service.GameService;
 import com.nameNotFound.javaChess.userInterface.UserInterface;
 
 public class WindowUI extends UserInterface implements ActionListener {
-    private GameService gameService = GameService.getInstance();
+    private final GameService gameService = GameService.getInstance();
     private JFrame menuWindow;
     private JFrame boardWindow;
     private JFrame takenPiecesWindow;
@@ -58,6 +58,11 @@ public class WindowUI extends UserInterface implements ActionListener {
 
     @Override
     public void showTurn() {
+
+    }
+
+    @Override
+    public void play() {
 
     }
 

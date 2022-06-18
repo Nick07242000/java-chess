@@ -87,7 +87,7 @@ public class Game extends Observable {
     public boolean movePiece(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo) throws InvalidPositionException{
         Movement movement = new Movement(posOne, posTwo, board.getPiece(posOne).getWasMoved());
         boolean takePiece = false;
-        if (!analizeTrajectory(posOne, posTwo)) {
+        if (!analyzeTrajectory(posOne, posTwo)) {
             throw new InvalidPositionException("Hay piezas en el camino!");
         }
         else if (pieceTwo != null) {
@@ -131,7 +131,7 @@ public class Game extends Observable {
     }
 
     public boolean canCastle(Position posOne, Position posTwo, Piece pieceOne, Piece pieceTwo, String corner) {
-        if (analizeTrajectory(posTwo, posOne)) {
+        if (analyzeTrajectory(posTwo, posOne)) {
             if (!pieceOne.getWasMoved() && !pieceTwo.getWasMoved()) {
                 ArrayList<Position> positions = new ArrayList<>();
                 switch (corner) {
@@ -247,7 +247,7 @@ public class Game extends Observable {
      * verifica que, si la ficha realiza una trayectoria larga, no colisione con otras piezas en el trayecto,
      * a excepcion de la posicion final donde puede llegar a haber una pieza cualquiera
      */
-    public boolean analizeTrajectory(Position posOne, Position posTwo) {
+    public boolean analyzeTrajectory(Position posOne, Position posTwo) {
         if (board.getPiece(posOne).getLongMovement()) { //veo si la pieza realiza movimientos de trayectoria
             boolean no_obstruction = true;
             int x1 = posOne.getX();
@@ -398,7 +398,7 @@ public class Game extends Observable {
     private boolean isValidMovement(Position posOne, Position posTwo) {
         ArrayList<Position> possibleTakes = board.getPiece(posOne).possibleTakes(posOne);
         if (SearchArray.searchPositionInArray(possibleTakes, posTwo) && board.getPiece(posTwo) != null) //veo si la posicion final se encuentra en una posicion de toma valido de la pieza
-            return analizeTrajectory(posOne, posTwo);
+            return analyzeTrajectory(posOne, posTwo);
         else
             return false;
     }
