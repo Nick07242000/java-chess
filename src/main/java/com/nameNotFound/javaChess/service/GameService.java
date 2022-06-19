@@ -57,16 +57,12 @@ public class GameService {
         Board board = getBoard();
         Piece pieceOne = board.getPiece(pos1);
         Piece pieceTwo = board.getPiece(pos2);
-        ArrayList<Position> possibleMovements = new ArrayList<>();
-        ArrayList<Position> possibleTakes = new ArrayList<>();
-        if (pieceOne != null) {
-            possibleMovements = pieceOne.possibleMovements(pos1);
-            possibleTakes = pieceOne.possibleTakes(pos1);
-        }
         boolean wasPieceTaken;
         if (pieceOne == null)
             throw new InvalidPositionException("Porfavor seleccione una Pieza!");
-        else if (!pieceOne.getColor().equals(game.getTurn()))
+        ArrayList<Position> possibleMovements = pieceOne.possibleMovements(pos1);
+        ArrayList<Position> possibleTakes = pieceOne.possibleTakes(pos1);
+        if (!pieceOne.getColor().equals(game.getTurn()))
             throw new InvalidPositionException("No puede mover las piezas de su oponente!");
         else if (pieceTwo == null) {
             if (!SearchArray.searchPositionInArray(possibleMovements, pos2))
