@@ -47,7 +47,7 @@ public class Board {
     public void movePiece(Position posOne, Position posTwo) {
         board[posTwo.getX()][posTwo.getY()] = board[posOne.getX()][posOne.getY()];
         board[posOne.getX()][posOne.getY()] = null;
-        if (board[posTwo.getX()][posTwo.getY()].getWasMoved())
+        if (!board[posTwo.getX()][posTwo.getY()].getWasMoved())
             board[posTwo.getX()][posTwo.getY()].setWasMoved(true);
     }
 
