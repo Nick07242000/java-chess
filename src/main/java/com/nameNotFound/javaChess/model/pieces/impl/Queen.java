@@ -16,7 +16,7 @@ public class Queen extends Piece {
         ArrayList<Position> output = new ArrayList<Position>();
         int x = pos.getX();
         int y = pos.getY();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i <= 7; i++) {
             if (y+i <= 7) {
                 output.add(new Position(x, y+i));
                 if (x+i <= 7)
@@ -43,7 +43,7 @@ public class Queen extends Piece {
         ArrayList<Position> output = new ArrayList<Position>();
         int x = pos.getX();
         int y = pos.getY();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i <= 7; i++) {
             if (y+i <= 7) {
                 output.add(new Position(x, y+i));
                 if (x+i <= 7)
