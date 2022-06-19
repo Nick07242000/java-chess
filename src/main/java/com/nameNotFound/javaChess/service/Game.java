@@ -353,7 +353,7 @@ public class Game extends Observable {
      * se le pasa una posicion por argumento y devuelve un booleano en el caso de
      * que esa posicion se vea atacada por alguna pieza enemiga
      */
-    private boolean isAttacked(Position pos) {
+    public boolean isAttacked(Position pos) {
         ColorEnum opponent;
         ArrayList<Position> positions = new ArrayList<>();
         if (turn.equals(ColorEnum.BLACK))
@@ -375,7 +375,7 @@ public class Game extends Observable {
      * se le pasa un arraylist de posiciones por argumento y devuelve un booleano en el caso de
      * que alguna de esas posiciones se vea atacada po alguna pieza enemiga
      */
-    private boolean isAttacked(ArrayList<Position> pos) {
+    public boolean isAttacked(ArrayList<Position> pos) {
         ColorEnum opponent;
         ArrayList<Position> positions = new ArrayList<>();
         if (turn.equals(ColorEnum.BLACK))
