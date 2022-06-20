@@ -7,7 +7,9 @@ The app is written in Java using [Apache Maven](https://maven.apache.org/) for e
 
 An MVC architecture is used in the proyect and Observer, Strategy, Factory and Singleton programming patterns have been applied.
 
-[JUnit 5](https://junit.org/junit5/) was used for testing purposed.
+[JUnit 5](https://junit.org/junit5/) was used for testing purposes.
+
+A [Trello](https://trello.com/b/dCF3rzqK/javachess) board was used to track task completion.
 
 ## Features
 
