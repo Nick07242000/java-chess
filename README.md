@@ -23,17 +23,20 @@ An MVC architecture is used in the proyect and Observer, Strategy, Factory and S
 ## Setup and Run
 No installation is required, attached to the release you can find a zip which contains the executable.
 
-# Easy Way
+### Easy Way
 Simply unzip the folder somewhere in your device and double click 'start.bat' file. This will launch the application.
 We recommend setting up a shortcut to 'start.bat' for easy application start-up.
 
-# Recommended Way
+### Recommended Way
 The app is better experienced in the Linux console, so we recommend starting it using bash terminal.
 For windows, open a bash terminal in the file path and run "java -jar JavaChess-2.0.0.jar"
 
 ## Prerequisites
 This application requires Java 8 or newer in order to function.
 (Optional) For a better experience Git for Windows is recommended.
+
+## Documentation
+The [Documentation](https://github.com/Nick07242000/JavaChess/tree/main/docs) for this proyect can be found within the repository files.
 
 ## Team
 - [Fabian Nicolas Hidalgo](https://github.com/Nick07242000)
